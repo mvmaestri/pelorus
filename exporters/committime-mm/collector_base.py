@@ -24,7 +24,9 @@ class AbstractCommitCollector(pelorus.AbstractPelorusExporter):
         self._commit_dict = {}
         self._timedate_format = timedate_format
         self._collector_name = collector_name
+
         logging.info("=====Using %s Collector=====" % (self._collector_name))
+        logging.info("DEBUG" % (self))
 
     def collect(self):
         commit_metric = GaugeMetricFamily('commit_timestamp',
@@ -66,7 +68,7 @@ class AbstractCommitCollector(pelorus.AbstractPelorusExporter):
 
             v1_builds = self._kube_client.resources.get(api_version='build.openshift.io/v1', kind='Build')
 
-            logging.info(self._kube_client.resources.get(api_version='tekton.dev/v1alpha1', kind='PipelineRun'))
+            logging.info("PipelineRun" % (self._kube_client.resources.get(api_version='tekton.dev/v1alpha1', kind='PipelineRun')))
             # only use builds that have the app label
         
             builds = v1_builds.get(namespace=namespace, label_selector=app_label)
