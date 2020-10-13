@@ -26,3 +26,23 @@ exporters:
       value: deploytime/app.py
     source_ref: master
     source_url: https://github.com/redhat-cop/pelorus.git
+
+  - app_name: committime-github-mm
+    env_from_secrets:
+    - github-secret
+    source_context_dir: exporters/
+    extraEnv:
+    - name: APP_FILE
+      value: committime/app.py
+    source_ref: feature/tekton-pipelinerun
+    source_url: https://github.com/mvmaestri/pelorus.git
+
+  - app_name: failure-exporter
+    env_from_secrets:
+    - jira-secret
+    source_context_dir: exporters/
+    extraEnv:
+    - name: APP_FILE
+      value: failure/app.py
+    source_ref: master
+    source_url: https://github.com/redhat-cop/pelorus.git
