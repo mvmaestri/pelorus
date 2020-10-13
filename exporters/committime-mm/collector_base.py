@@ -65,7 +65,10 @@ class AbstractCommitCollector(pelorus.AbstractPelorusExporter):
             logging.debug("Searching for builds with label: %s in namespace: %s" % (app_label, namespace))
 
             v1_builds = self._kube_client.resources.get(api_version='build.openshift.io/v1', kind='Build')
+
+            logging.info(self._kube_client.resources.get(api_version='tekton.dev/v1alpha1', kind='PipelineRun'))
             # only use builds that have the app label
+        
             builds = v1_builds.get(namespace=namespace, label_selector=app_label)
 
             # use a jsonpath expression to find all values for the app label
